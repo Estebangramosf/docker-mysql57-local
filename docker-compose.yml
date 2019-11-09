@@ -1,0 +1,31 @@
+version: '3.6'
+
+services:
+
+  mysql57:
+    container_name: mysql57
+    build:
+      context: .
+      dockerfile: dockerfiles/Mysql57.Dockerfile
+    volumes:
+      - mysql57dbdata:/var/lib/mysql
+      - ./extra_data:/opt
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    networks:
+      - mysql57net
+    ports:
+     - "3306:3306"
+
+
+# Docker Volumes
+volumes:
+  mysql57dbdata:
+
+# Docker Networks
+networks:
+  mysql57net:
+    external: true
+  mysql57_network_external:
+    external: true
